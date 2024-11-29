@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     EditText kWh;
     TextView Rebate;
     Button Clear;
+    TextView Warning;
 
 
     @Override
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         kWh = findViewById(R.id.kWh);
         Rebate = findViewById(R.id.Rebate);
         Clear = findViewById(R.id.Clear);
+        Warning = findViewById(R.id.Warning);
 
         Calc.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     double Rebate = Double.parseDouble(rebate);
 
                     if(Rebate>5){
-                        TotalChg.setText("Please insert rebate between 0-5");
+                        Warning.setText("Please insert rebate between 0-5");
                         return;
                     }
 
@@ -77,8 +79,9 @@ public class MainActivity extends AppCompatActivity {
                     FinalTotal -= (FinalTotal*rebate2);
 
                     TotalChg.setText("RM"+String.format("%.2f", FinalTotal));
+                    Warning.setText("");
                 }catch(NumberFormatException nfe){
-                    TotalChg.setText("Please insert number");
+                    Warning.setText("Please insert number");
                     Toast.makeText(getApplicationContext(), "Please insert number",Toast.LENGTH_SHORT);
                 }
             }
@@ -87,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         Clear.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                TotalChg.setText("Start calculate your bills");
+                TotalChg.setText("Lets calculate your bills again");
             }
         });
 
